@@ -26,7 +26,8 @@
       </q-item>
         <q-item-section>
          <q-btn color="grey">Save</q-btn>
-         <q-btn color="red">Delete</q-btn>
+         <q-btn color="red" @click="removeItem('Documents', {{index}})" :index="test">Delete
+        </q-btn>
         </q-item-section>
     </q-list>
   <p></p>
@@ -38,7 +39,7 @@ export default {
   // name: 'ComponentName',
   data () {
     return {
-      val: true
+      val: 'Documents'
     }
   }
 }

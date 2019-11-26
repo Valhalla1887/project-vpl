@@ -2,7 +2,7 @@
   <q-page>
     <Documents  @mousedown.native="moveStart($event, 'Documents', i-1)" @mouseup.native="moveEnd($event, 'Documents', i-1)" @mousemove.native="moveActive($event, 'Documents', i-1)"
     class="movable" :ref="'Documents'+(i-1)"
-     :style="{'left': positionsDocuments[i-1][0] + 'px', 'top': positionsDocuments[i-1][1] + 'px'}" v-for="i in positionsDocuments.length" :key="'Documents'+i"></Documents>
+     :style="{'left': positionsDocuments[i-1][0] + 'px', 'top': positionsDocuments[i-1][1] + 'px'}" v-for="i in positionsDocuments.length" :key="'Documents'+i" :index="i-1"></Documents>
     <Saturation  @mousedown.native="moveStart($event, 'Saturation', i-1)" @mouseup.native="moveEnd($event,'Saturation', i-1)" @mousemove.native="moveActive($event, 'Saturation', i-1)"
       class="movable" :ref="'Saturation'+(i-1)"
      :style="{'left': positionsSaturation[i-1][0] + 'px', 'top': positionsSaturation[i-1][1] + 'px'}" v-for="i in positionsSaturation.length" :key="'Saturation'+i"></Saturation>
@@ -17,7 +17,7 @@
      <button @click="addItem('OCR')">Add OCR block</button>
      <button @click="addItem('SaveDoc')">Add SaveDoc block</button>
      <hr/>
-     <button @click="removeItem('Documents')">Remove Documents block</button>
+     <button @click="removeItem('Documents', index)">Remove Documents block</button>
      <button @click="removeItem('Saturation')">Remove Saturation block</button>
      <button @click="removeItem('OCR')">Remove OCR block</button>
      <button @click="removeItem('SaveDoc')">Remove SaveDoc block</button>
@@ -61,8 +61,8 @@ export default {
     }
   },
   methods: {
-    removeItem: function (type) {
-      this['positions' + type].pop()
+    removeItem: function (type, index) {
+      this['positions' + type].splice(index, 1)
     },
     // Find out which element moved
     addItem: function (type) {
