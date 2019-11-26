@@ -1,14 +1,12 @@
 <template>
   <q-page>
-<q-btn @click="addItem('list')" color="white" text-color="black" label="Standard" />
-    <list :num="'toggle'" v-show="show"></list>
     <demo2  @mousedown.native="moveStart($event, 'Demo2', i-1)" @mouseup.native="moveEnd($event, 'Demo2', i-1)" @mousemove.native="moveActive($event, 'Demo2', i-1)"
     class="movable" :ref="'Demo2'+(i-1)"
      :style="{'left': positionsDemo2[i-1][0] + 'px', 'top': positionsDemo2[i-1][1] + 'px'}" v-for="i in positionsDemo2.length" :key="'demo2'+i"></demo2>
     <demo3  @mousedown.native="moveStart($event, 'Demo3', i-1)" @mouseup.native="moveEnd($event,'Demo3', i-1)" @mousemove.native="moveActive($event, 'Demo3', i-1)"
       class="movable" :ref="'Demo3'+(i-1)"
      :style="{'left': positionsDemo3[i-1][0] + 'px', 'top': positionsDemo3[i-1][1] + 'px'}" v-for="i in positionsDemo3.length" :key="'demo3'+i"></demo3>
-     <button @click="addItem('Demo2')">Add input block</button>
+     <button @click="addItem('Demo2')">Add document</button>
      <button @click="addItem('Demo3')">Add output block</button>
      <hr/>
      Open the console and move a demo2  element over an other demo2 element. Also, move a demo3 element over another demo2 element
@@ -27,14 +25,12 @@
 <script>
 import Demo2 from '../components/Demo2.vue'
 import Demo3 from '../components/Demo3.vue'
-import list from '../components/list.vue'
 import { TouchPan } from 'quasar'
 export default {
   name: 'PageIndex',
   components: {
     Demo2,
-    Demo3,
-    list
+    Demo3
   },
   directives: {
     TouchPan
