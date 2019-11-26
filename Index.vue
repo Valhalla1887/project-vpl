@@ -85,7 +85,7 @@ export default {
     moveEnd: function (event, type, index) {
       this.moving = false
     },
-     moveActive: function (event, type, index) {
+    moveActive: function (event, type, index) {
       if (this.moving) {
         console.log(type + ' of index ' + index + ' is moving')
         var posVar = 'positions' + type
