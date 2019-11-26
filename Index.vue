@@ -9,9 +9,13 @@
      <OCR  @mousedown.native="moveStart($event, 'OCR', i-1)" @mouseup.native="moveEnd($event,'OCR', i-1)" @mousemove.native="moveActive($event, 'OCR', i-1)"
       class="movable" :ref="'OCR'+(i-1)"
      :style="{'left': positionsOCR[i-1][0] + 'px', 'top': positionsOCR[i-1][1] + 'px'}" v-for="i in positionsOCR.length" :key="'OCR'+i"></OCR>
-     <button @click="addItem('Documents')">Add document</button>
+     <button @click="addItem('Documents')">Add Documents block</button>
      <button @click="addItem('Saturation')">Add Saturation block</button>
      <button @click="addItem('OCR')">Add OCR block</button>
+     <hr/>
+     <button @click="removeItem('Documents')">Remove Documents Block</button>
+     <button @click="removeItem('Saturation')">Remove Saturation Block</button>
+     <button @click="removeItem('OCR')">Remove OCR Block</button>
      <hr/>
 
   </q-page>
@@ -57,6 +61,9 @@ export default {
   methods: {
     toggleItem: function () {
       this.show = !this.show
+    },
+    removeItem: function (type) {
+      this['positions' + type].pop()
     },
     // Find out which element moved
     addItem: function (type) {
