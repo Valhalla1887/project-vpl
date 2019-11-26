@@ -49,8 +49,6 @@ export default {
     return {
       moving: false,
       // Separate arrays for tracking different elements
-      // The arrays can also hold other properties of the elements apart from their positions
-      // I'll leave that as an exercise
       // Any addition to the array will create a new element to the screen
       positionsDocuments: [],
       positionsSaturation: [],
@@ -99,8 +97,6 @@ export default {
         console.log(posVar)
         this.$set(this[posVar][index], 0, this[posVar][index][0] + deltaX)
         this.$set(this[posVar][index], 1, this[posVar][index][1] + deltaY)
-      // You can repeat the loop with Saturation i.e positionsSaturation to check collision with that element
-      // I'll leave it as an exercise
       }
     }
   }
