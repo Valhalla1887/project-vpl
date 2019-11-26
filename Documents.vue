@@ -1,7 +1,7 @@
 <template>
   <div>
-     <q-list bordered separator>
-      <q-item clickable v-ripple>
+     <q-list bordered separator class="bg-white">
+      <q-item clickable v-ripple class="bg-green">
         <q-item-section>Documents</q-item-section>
       </q-item>
       <q-item clickable v-ripple>
@@ -25,7 +25,8 @@
         </q-item-section>
       </q-item>
         <q-item-section>
-         <q-btn>Save</q-btn>
+         <q-btn color="grey">Save</q-btn>
+         <q-btn color="red">Delete</q-btn>
         </q-item-section>
     </q-list>
   <p></p>
