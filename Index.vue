@@ -9,13 +9,13 @@
      <OCR  @mousedown.native="moveStart($event, 'OCR', i-1)" @mouseup.native="moveEnd($event,'OCR', i-1)" @mousemove.native="moveActive($event, 'OCR', i-1)"
       class="movable" :ref="'OCR'+(i-1)"
      :style="{'left': positionsOCR[i-1][0] + 'px', 'top': positionsOCR[i-1][1] + 'px'}" v-for="i in positionsOCR.length" :key="'OCR'+i"></OCR>
-     <button @click="addItem('Documents')">Add Documents block</button>
-     <button @click="addItem('Saturation')">Add Saturation block</button>
-     <button @click="addItem('OCR')">Add OCR block</button>
+     <q-btn @click="addItem('Documents')">Add Documents block</q-btn>
+     <q-btn @click="addItem('Saturation')">Add Saturation block</q-btn>
+     <q-btn @click="addItem('OCR')">Add OCR block</q-btn>
      <hr/>
-     <button @click="removeItem('Documents')">Remove Documents Block</button>
-     <button @click="removeItem('Saturation')">Remove Saturation Block</button>
-     <button @click="removeItem('OCR')">Remove OCR Block</button>
+     <q-btn @click="removeItem('Documents')">Remove Documents Block</q-btn>
+     <q-btn @click="removeItem('Saturation')">Remove Saturation Block</q-btn>
+     <q-btn @click="removeItem('OCR')">Remove OCR Block</q-btn>
      <hr/>
 
   </q-page>
@@ -85,7 +85,7 @@ export default {
     moveEnd: function (event, type, index) {
       this.moving = false
     },
-    moveActive: function (event, type, index) {
+     moveActive: function (event, type, index) {
       if (this.moving) {
         console.log(type + ' of index ' + index + ' is moving')
         var posVar = 'positions' + type
@@ -106,45 +106,9 @@ export default {
         this.$set(this[posVar][index], 0, this[posVar][index][0] + deltaX)
         this.$set(this[posVar][index], 1, this[posVar][index][1] + deltaY)
 
-        // Check for collision
-
-        var boundBox1
-
-        // get Bounding box of the current element
-        // sometimes the $el is in [0] sometimes it is not. checking for both
-        if (typeof this.$refs[type + index].$el === 'undefined') {
-          boundBox1 = this.$refs[type + index][0].$el.getBoundingClientRect()
-        } else {
-          boundBox1 = this.$refs[type + index].$el.getBoundingClientRect()
-        }
-
-        // Check Collision with Documents
-        // looping for all elements of that type execept for itself
-
-        for (var i = 0; i < this.positionsDocuments.length; i++) {
-          if (index !== i) {
-            let boundBox2
-
-            // Get the bounding box of the other elements
-            if (typeof this.$refs['Documents' + i].$el === 'undefined') {
-              boundBox2 = this.$refs['Documents' + i][0].$el.getBoundingClientRect()
-            } else {
-              boundBox2 = this.$refs['Documents' + i].$el.getBoundingClientRect()
-            }
-
-            var overlap = !(boundBox1.right < boundBox2.left ||
-                            boundBox1.left > boundBox2.right ||
-                            boundBox1.bottom < boundBox2.top ||
-                            boundBox1.top > boundBox2.bottom)
-
-            if (overlap) {
-              console.log(type + ' of index ' + index + ' collided with Documents of index ' + i)
-            }
-          }
-        }
-      }
       // You can repeat the loop with Saturation i.e positionsSaturation to check collision with that element
       // I'll leave it as an exercise
+      }
     }
   }
 }
