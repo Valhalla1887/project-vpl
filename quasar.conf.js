@@ -49,7 +49,10 @@ module.exports = function (ctx) {
       'QBtn',
       'QCheckbox',
       'QField',
-      'QUploader'
+      'QUploader',
+      'QBtnGroup',
+      'QSlider',
+      'QRange'
       ],
       directives: [],
 

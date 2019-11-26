@@ -1,15 +1,18 @@
 <template>
   <q-page>
-    <demo2  @mousedown.native="moveStart($event, 'Demo2', i-1)" @mouseup.native="moveEnd($event, 'Demo2', i-1)" @mousemove.native="moveActive($event, 'Demo2', i-1)"
-    class="movable" :ref="'Demo2'+(i-1)"
-     :style="{'left': positionsDemo2[i-1][0] + 'px', 'top': positionsDemo2[i-1][1] + 'px'}" v-for="i in positionsDemo2.length" :key="'demo2'+i"></demo2>
-    <demo3  @mousedown.native="moveStart($event, 'Demo3', i-1)" @mouseup.native="moveEnd($event,'Demo3', i-1)" @mousemove.native="moveActive($event, 'Demo3', i-1)"
-      class="movable" :ref="'Demo3'+(i-1)"
-     :style="{'left': positionsDemo3[i-1][0] + 'px', 'top': positionsDemo3[i-1][1] + 'px'}" v-for="i in positionsDemo3.length" :key="'demo3'+i"></demo3>
-     <button @click="addItem('Demo2')">Add document</button>
-     <button @click="addItem('Demo3')">Add output block</button>
+    <Documents  @mousedown.native="moveStart($event, 'Documents', i-1)" @mouseup.native="moveEnd($event, 'Documents', i-1)" @mousemove.native="moveActive($event, 'Documents', i-1)"
+    class="movable" :ref="'Documents'+(i-1)"
+     :style="{'left': positionsDocuments[i-1][0] + 'px', 'top': positionsDocuments[i-1][1] + 'px'}" v-for="i in positionsDocuments.length" :key="'Documents'+i"></Documents>
+    <Saturation  @mousedown.native="moveStart($event, 'Saturation', i-1)" @mouseup.native="moveEnd($event,'Saturation', i-1)" @mousemove.native="moveActive($event, 'Saturation', i-1)"
+      class="movable" :ref="'Saturation'+(i-1)"
+     :style="{'left': positionsSaturation[i-1][0] + 'px', 'top': positionsSaturation[i-1][1] + 'px'}" v-for="i in positionsSaturation.length" :key="'Saturation'+i"></Saturation>
+     <OCR  @mousedown.native="moveStart($event, 'OCR', i-1)" @mouseup.native="moveEnd($event,'OCR', i-1)" @mousemove.native="moveActive($event, 'OCR', i-1)"
+      class="movable" :ref="'OCR'+(i-1)"
+     :style="{'left': positionsOCR[i-1][0] + 'px', 'top': positionsOCR[i-1][1] + 'px'}" v-for="i in positionsOCR.length" :key="'OCR'+i"></OCR>
+     <button @click="addItem('Documents')">Add document</button>
+     <button @click="addItem('Saturation')">Add Saturation block</button>
+     <button @click="addItem('OCR')">Add OCR block</button>
      <hr/>
-     Open the console and move a demo2  element over an other demo2 element. Also, move a demo3 element over another demo2 element
 
   </q-page>
 </template>
@@ -23,14 +26,16 @@
 </style>
 
 <script>
-import Demo2 from '../components/Demo2.vue'
-import Demo3 from '../components/Demo3.vue'
+import Documents from '../components/Documents.vue'
+import Saturation from '../components/Saturation.vue'
+import OCR from '../components/OCR.vue'
 import { TouchPan } from 'quasar'
 export default {
   name: 'PageIndex',
   components: {
-    Demo2,
-    Demo3
+    Documents,
+    Saturation,
+    OCR
   },
   directives: {
     TouchPan
@@ -44,8 +49,9 @@ export default {
       // I'll leave that as an exercise
 
       // Any addition to the array will create a new element to the screen
-      positionsDemo2: [[100, 100], [200, 200], [300, 300]],
-      positionsDemo3: [[400, 400], [500, 500], [600, 600]]
+      positionsDocuments: [],
+      positionsSaturation: [],
+      positionsOCR: []
     }
   },
   methods: {
@@ -56,10 +62,12 @@ export default {
     addItem: function (type) {
       // Read this:
       // https://vuejs.org/2016/02/06/common-gotchas/
-      if (type === 'Demo2') {
-        this['positions' + type].push([50, 50])
+      if (type === 'Documents') {
+        this['positions' + type].push([Math.random() * 1000, 50])
+      } else if (type === 'Saturation') {
+        this['positions' + type].push([Math.random() * 1000, 250])
       } else {
-        this['positions' + type].push([100, 160])
+        this['positions' + type].push([Math.random() * 1000, 450])
       }
     },
     moveStart: function (event, type, index) {
@@ -103,18 +111,18 @@ export default {
           boundBox1 = this.$refs[type + index].$el.getBoundingClientRect()
         }
 
-        // Check Collision with Demo2
+        // Check Collision with Documents
         // looping for all elements of that type execept for itself
 
-        for (var i = 0; i < this.positionsDemo2.length; i++) {
+        for (var i = 0; i < this.positionsDocuments.length; i++) {
           if (index !== i) {
             let boundBox2
 
             // Get the bounding box of the other elements
-            if (typeof this.$refs['Demo2' + i].$el === 'undefined') {
-              boundBox2 = this.$refs['Demo2' + i][0].$el.getBoundingClientRect()
+            if (typeof this.$refs['Documents' + i].$el === 'undefined') {
+              boundBox2 = this.$refs['Documents' + i][0].$el.getBoundingClientRect()
             } else {
-              boundBox2 = this.$refs['Demo2' + i].$el.getBoundingClientRect()
+              boundBox2 = this.$refs['Documents' + i].$el.getBoundingClientRect()
             }
 
             var overlap = !(boundBox1.right < boundBox2.left ||
@@ -123,12 +131,12 @@ export default {
                             boundBox1.top > boundBox2.bottom)
 
             if (overlap) {
-              console.log(type + ' of index ' + index + ' collided with Demo2 of index ' + i)
+              console.log(type + ' of index ' + index + ' collided with Documents of index ' + i)
             }
           }
         }
       }
-      // You can repeat the loop with Demo3 i.e positionsDemo3 to check collision with that element
+      // You can repeat the loop with Saturation i.e positionsSaturation to check collision with that element
       // I'll leave it as an exercise
     }
   }
