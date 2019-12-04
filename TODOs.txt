@@ -1,3 +1,0 @@
-Connect blocks with lines
-
-Option to delete blocks - done (provisional)
