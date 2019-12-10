@@ -54,6 +54,7 @@ export default {
   data () {
     return {
       moving: false,
+      visible: true,
       // Separate arrays for tracking different elements
       // Any addition to the array will create a new element to the screen
       positionsDocuments: [],
@@ -75,11 +76,9 @@ export default {
       console.log(index)
 =======
     deletethis: function (index) {
-      // console.log('xD')
-      console.log(this.positionsDocuments[index].visible)
+      console.log(this.visible)
       // this.positionsDocuments[index] = null
-      this.positionsDocuments[index].visible = false
->>>>>>> 5e95f9dfc732d521043dda87aaac0ffd5c6aff14
+      this.visible = false
     },
     // Find out which element moved
     addItem: function (type) {

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="visible === true">
+  <div v-if="this.visible === true">
      <q-list bordered separator class="bg-white">
       <q-item clickable v-ripple class="bg-green">
         <q-item-section>Documents</q-item-section>
@@ -49,6 +49,7 @@ export default {
   methods: {
     deleteBlock: function () {
       this.$emit('deleteblock')
+      console.log(this.visible)
     }
   }
 }
