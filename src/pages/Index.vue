@@ -63,12 +63,9 @@ export default {
   },
   methods: {
     jsPlumbInit: function () {
-      this.jsPlumb.ready(function () {
-        let firstInstance = this.jsPlumb.getInstance()
-        firstInstance.importDefaults({
-          Connector: [ 'Bezier', { curviness: 150 } ],
-          Anchors: [ 'TopCenter', 'BottomCenter' ]
-        })
+      // ready is not a function?
+      jsPlumb.ready(function () {
+        console.log('test')
       })
     },
     toggleItem: function () {
@@ -83,7 +80,7 @@ export default {
     },
     connectTest: function () {
       this.jsPlumbInit()
-      this.firstInstance.connect({ source: 'Doc1', target: 'Doc2' })
+      jsPlumb.connect({ source: 'Doc1', target: 'Doc2' })
     },
     // Find out which element moved
     addItem: function (type) {
