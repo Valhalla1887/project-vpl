@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <Documents  @mousedown.native="moveStart($event, 'Documents', i-1)" @mouseup.native="moveEnd($event, 'Documents', i-1)" @mousemove.native="moveActive($event, 'Documents', i-1)"
-    class="movable" :ref="'Documents'+(i-1)" :index="i-1"
+    class="movable" :ref="'Documents'+(i-1)" :id="'Doc'+i"
      :style="{'left': positionsDocuments[i-1][0] + 'px', 'top': positionsDocuments[i-1][1] + 'px'}" v-for="i in positionsDocuments.length" :key="'Documents'+i"></Documents>
     <Saturation  @mousedown.native="moveStart($event, 'Saturation', i-1)" @mouseup.native="moveEnd($event,'Saturation', i-1)" @mousemove.native="moveActive($event, 'Saturation', i-1)"
       class="movable" :ref="'Saturation'+(i-1)"
@@ -17,7 +17,8 @@
      <q-btn @click="addItem('OCR')">Add OCR block</q-btn>
      <q-btn @click="addItem('SaveDoc')">Add SaveDoc block</q-btn>
      <hr/>
-     <q-btn @click="clearAll()">Clear All</q-btn>
+     <q-btn color="red" @click="clearAll()">Clear All</q-btn>
+     <q-btn color="orange" @click="connectTest()">Test Connection</q-btn>
      <hr/>
 
   </q-page>
@@ -61,14 +62,28 @@ export default {
     }
   },
   methods: {
+    jsPlumbInit: function () {
+      this.jsPlumb.ready(function () {
+        let firstInstance = this.jsPlumb.getInstance()
+        firstInstance.importDefaults({
+          Connector: [ 'Bezier', { curviness: 150 } ],
+          Anchors: [ 'TopCenter', 'BottomCenter' ]
+        })
+      })
+    },
     toggleItem: function () {
       this.show = !this.show
     },
+    // Clear all Blocks, empty all arrays
     clearAll: function () {
       this.positionsDocuments.splice(0, this.positionsDocuments.length)
       this.positionsSaturation.splice(0, this.positionsSaturation.length)
       this.positionsOCR.splice(0, this.positionsOCR.length)
       this.positionsSaveDoc.splice(0, this.positionsSaveDoc.length)
+    },
+    connectTest: function () {
+      this.jsPlumbInit()
+      this.firstInstance.connect({ source: 'Doc1', target: 'Doc2' })
     },
     // Find out which element moved
     addItem: function (type) {
@@ -101,15 +116,6 @@ export default {
         this.$set(this[posVar][index], 0, this[posVar][index][0] + deltaX)
         this.$set(this[posVar][index], 1, this[posVar][index][1] + deltaY)
       }
-    },
-    jsPlumbInit: function () {
-      jsPlumb.ready(function () {
-        let firstInstance = jsPlumb.getInstance()
-        firstInstance.importDefaults({
-          Connector: [ 'Bezier', { curviness: 150 } ],
-          Anchors: [ 'TopCenter', 'BottomCenter' ]
-        })
-      })
     }
   }
 }

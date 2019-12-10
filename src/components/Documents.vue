@@ -8,7 +8,7 @@
         <q-item-section>
           <div class="row q-col-gutter-lg">
          <q-space />
-         <q-checkbox stretch flat label="Output" left-label="true" v-model="val"/>
+         <q-checkbox label="Output" v-model="val" id="id"/>
        </div>
         </q-item-section>
       </q-item>
@@ -29,7 +29,7 @@
          <q-btn color="grey">Save</q-btn>
          <q-btn color="red" @click="deleteBlock()">Delete</q-btn>
         </q-item-section>
-
+        {{ id }}
     </q-list>
   <p></p>
   </div>
@@ -38,7 +38,7 @@
 <script>
 export default {
   // name: 'ComponentName',
-  props: ['index'],
+  props: ['id'],
   data () {
     return {
       val: true,
