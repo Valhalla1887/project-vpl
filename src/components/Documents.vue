@@ -50,6 +50,7 @@ export default {
   methods: {
     deleteBlock: function () {
       this.$emit('deleteblock')
+      this.visible = false
     }
   }
 }

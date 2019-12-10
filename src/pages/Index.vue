@@ -73,7 +73,6 @@ export default {
     deletethis: function (index) {
       // console.log(this.visible)
       // this.positionsDocuments[index] = null
-      this.visible = false
     },
     // Find out which element moved
     addItem: function (type) {
