@@ -70,11 +70,6 @@ export default {
     removeItem: function (type) {
       this['positions' + type].pop()
     },
-<<<<<<< HEAD
-    deleteThis: function (event, index) {
-      this['positionsDocuments'][index] = null
-      console.log(index)
-=======
     deletethis: function (index) {
       console.log(this.visible)
       // this.positionsDocuments[index] = null
