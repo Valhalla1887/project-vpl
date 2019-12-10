@@ -17,10 +17,7 @@
      <q-btn @click="addItem('OCR')">Add OCR block</q-btn>
      <q-btn @click="addItem('SaveDoc')">Add SaveDoc block</q-btn>
      <hr/>
-     <q-btn @click="removeItem('Documents')">Remove Documents Block</q-btn>
-     <q-btn @click="removeItem('Saturation')">Remove Saturation Block</q-btn>
-     <q-btn @click="removeItem('OCR')">Remove OCR Block</q-btn>
-     <q-btn @click="removeItem('SaveDoc')">Remove SaveDoc Block</q-btn>
+     <q-btn @click="clearAll()">Clear All</q-btn>
      <hr/>
 
   </q-page>
@@ -66,8 +63,11 @@ export default {
     toggleItem: function () {
       this.show = !this.show
     },
-    removeItem: function (type) {
-      this['positions' + type].pop()
+    clearAll: function () {
+      this.positionsDocuments.splice(0, this.positionsDocuments.length)
+      this.positionsSaturation.splice(0, this.positionsSaturation.length)
+      this.positionsOCR.splice(0, this.positionsOCR.length)
+      this.positionsSaveDoc.splice(0, this.positionsSaveDoc.length)
     },
     // Find out which element moved
     addItem: function (type) {
