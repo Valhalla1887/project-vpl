@@ -37,6 +37,7 @@ import Saturation from '../components/Saturation.vue'
 import OCR from '../components/OCR.vue'
 import SaveDoc from '../components/SaveDoc.vue'
 import { TouchPan } from 'quasar'
+import * as jsPlumb from '../../node_modules/jsplumb/dist/js/jsplumb.js'
 export default {
   name: 'PageIndex',
   components: {
@@ -102,6 +103,11 @@ export default {
         this.$set(this[posVar][index], 0, this[posVar][index][0] + deltaX)
         this.$set(this[posVar][index], 1, this[posVar][index][1] + deltaY)
       }
+    },
+    jsPlumbInit: function () {
+      jsPlumb.ready(function () {
+      // your jsPlumb related init code goes here
+      })
     }
   }
 }
