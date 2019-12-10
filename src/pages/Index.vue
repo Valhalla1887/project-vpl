@@ -106,7 +106,11 @@ export default {
     },
     jsPlumbInit: function () {
       jsPlumb.ready(function () {
-      // your jsPlumb related init code goes here
+        let firstInstance = jsPlumb.getInstance()
+        firstInstance.importDefaults({
+          Connector: [ 'Bezier', { curviness: 150 } ],
+          Anchors: [ 'TopCenter', 'BottomCenter' ]
+        })
       })
     }
   }
