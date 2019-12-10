@@ -92,14 +92,12 @@ export default {
     },
     moveActive: function (event, type, index) {
       if (this.moving) {
-        console.log(type + ' of index ' + index + ' is moving')
+        // console.log(type + ' of index ' + index + ' is moving')
         var posVar = 'positions' + type
         this['movingTypeCurent'] = type
         this['movingIndexCurrent'] = index
         var deltaX = event.offsetX - this['offsetInitX' + type + index]
         var deltaY = event.offsetY - this['offsetInitY' + type + index]
-        console.log('I am here')
-        console.log(posVar)
         this.$set(this[posVar][index], 0, this[posVar][index][0] + deltaX)
         this.$set(this[posVar][index], 1, this[posVar][index][1] + deltaY)
       }
