@@ -40,16 +40,17 @@
 <script>
 export default {
   // name: 'ComponentName',
-  props: ['index', 'visible'],
+  props: ['index'],
   data () {
     return {
-      val: true
+      val: true,
+      visible: true
     }
   },
   methods: {
     deleteBlock: function () {
       this.$emit('deleteblock')
-      console.log(this.visible)
+      this.visible = false
     }
   }
 }
