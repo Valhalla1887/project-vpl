@@ -26,8 +26,12 @@
       </q-item>
         <q-item-section>
          <q-btn color="grey">Save</q-btn>
-         <q-btn color="red">Delete</q-btn>
+         <q-btn color="red" @click="deleteBlock()">Delete</q-btn>
         </q-item-section>
+      <q-item clickable v-ripple>
+        {{ index }}
+      </q-item>
+
     </q-list>
   <p></p>
   </div>
@@ -36,9 +40,15 @@
 <script>
 export default {
   // name: 'ComponentName',
+  props: ['index'],
   data () {
     return {
       val: true
+    }
+  },
+  methods: {
+    deleteBlock: function () {
+      this.$emit('deleteblock', this.index)
     }
   }
 }

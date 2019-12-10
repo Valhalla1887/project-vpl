@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <Documents  @mousedown.native="moveStart($event, 'Documents', i-1)" @mouseup.native="moveEnd($event, 'Documents', i-1)" @mousemove.native="moveActive($event, 'Documents', i-1)"
-    class="movable" :ref="'Documents'+(i-1)"
+    class="movable" :ref="'Documents'+(i-1)" :index="i" @deleteblock="deletethis(e)"
      :style="{'left': positionsDocuments[i-1][0] + 'px', 'top': positionsDocuments[i-1][1] + 'px'}" v-for="i in positionsDocuments.length" :key="'Documents'+i"></Documents>
     <Saturation  @mousedown.native="moveStart($event, 'Saturation', i-1)" @mouseup.native="moveEnd($event,'Saturation', i-1)" @mousemove.native="moveActive($event, 'Saturation', i-1)"
       class="movable" :ref="'Saturation'+(i-1)"
@@ -69,10 +69,12 @@ export default {
     removeItem: function (type) {
       this['positions' + type].pop()
     },
+    deletethis: function (event) {
+      // console.log('xD')
+      this['positionsDocuments[i]'].set(null)
+    },
     // Find out which element moved
     addItem: function (type) {
-      // Read this:
-      // https://vuejs.org/2016/02/06/common-gotchas/
       if (type === 'Documents') {
         this['positions' + type].push([Math.random() * 1000, 100])
       } else if (type === 'Saturation') {
@@ -100,9 +102,6 @@ export default {
         var deltaX = event.offsetX - this['offsetInitX' + type + index]
         var deltaY = event.offsetY - this['offsetInitY' + type + index]
         console.log('I am here')
-        // update the positions of the element in that specific index
-        // we use this.$set because vue cannot track simple array assignments
-        // https://vuejs.org/2016/02/06/common-gotchas/
         console.log(posVar)
         this.$set(this[posVar][index], 0, this[posVar][index][0] + deltaX)
         this.$set(this[posVar][index], 1, this[posVar][index][1] + deltaY)
