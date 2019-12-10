@@ -7,7 +7,8 @@
       <q-item clickable v-ripple>
         <q-item-section>
           <div class="row q-col-gutter-lg">
-         <q-checkbox label="Output" right-label="true" v-model="val"/>
+         <q-space />
+         <q-checkbox stretch flat label="Output" left-label="true" v-model="val"/>
        </div>
         </q-item-section>
       </q-item>
