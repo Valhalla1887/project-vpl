@@ -38,7 +38,7 @@ import Saturation from '../components/Saturation.vue'
 import OCR from '../components/OCR.vue'
 import SaveDoc from '../components/SaveDoc.vue'
 import { TouchPan } from 'quasar'
-import * as jsPlumb from '../../node_modules/jsplumb/dist/js/jsplumb.js'
+import { jsPlumb } from 'jsplumb' // '../../node_modules/jsplumb/dist/js/jsplumb.js'
 export default {
   name: 'PageIndex',
   components: {
