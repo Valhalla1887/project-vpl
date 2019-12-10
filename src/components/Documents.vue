@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="visible === true">
      <q-list bordered separator class="bg-white">
       <q-item clickable v-ripple class="bg-green">
         <q-item-section>Documents</q-item-section>
@@ -7,7 +7,7 @@
       <q-item clickable v-ripple>
         <q-item-section>
           <div class="row q-col-gutter-lg">
-         <q-checkbox align="right" left-label="Output" v-model="val"/>
+         <q-checkbox align="right" label="Output" v-model="val"/>
        </div>
         </q-item-section>
       </q-item>
@@ -40,7 +40,7 @@
 <script>
 export default {
   // name: 'ComponentName',
-  props: ['index'],
+  props: ['index', 'visible'],
   data () {
     return {
       val: true
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     deleteBlock: function () {
-      this.$emit('deleteblock', this.index)
+      this.$emit('deleteblock')
     }
   }
 }
