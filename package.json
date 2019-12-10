@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
+    "jsplumb": "^2.12.7",
     "quasar": "^1.4.5"
   },
   "devDependencies": {
