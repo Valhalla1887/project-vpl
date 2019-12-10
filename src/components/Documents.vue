@@ -8,7 +8,7 @@
         <q-item-section>
           <div class="row q-col-gutter-lg">
          <q-space />
-         <q-checkbox label="Output" v-model="val" id="id"/>
+         <q-checkbox label="Output" v-model="val" left-label="true" id="id"/>
        </div>
         </q-item-section>
       </q-item>
