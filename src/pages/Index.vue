@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <Documents  @mousedown.native="moveStart($event, 'Documents', i-1)" @mouseup.native="moveEnd($event, 'Documents', i-1)" @mousemove.native="moveActive($event, 'Documents', i-1)"
-    class="movable" :ref="'Documents'+(i-1)" :index="i" @deleteblock="deletethis(e, i-1)"
+    class="movable" :ref="'Documents'+(i-1)" :index="i-1" @deleteblock="deleteThis(e, i-1)"
      :style="{'left': positionsDocuments[i-1][0] + 'px', 'top': positionsDocuments[i-1][1] + 'px'}" v-for="i in positionsDocuments.length" :key="'Documents'+i"></Documents>
     <Saturation  @mousedown.native="moveStart($event, 'Saturation', i-1)" @mouseup.native="moveEnd($event,'Saturation', i-1)" @mousemove.native="moveActive($event, 'Saturation', i-1)"
       class="movable" :ref="'Saturation'+(i-1)"
@@ -69,9 +69,8 @@ export default {
     removeItem: function (type) {
       this['positions' + type].pop()
     },
-    deletethis: function (event, index) {
-      // console.log('xD')
-      this['positionsDocuments'].splice(index, 1)
+    deleteThis: function (event, index) {
+      this['positionsDocuments'][index] = null
       console.log(index)
     },
     // Find out which element moved
