@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <Documents  @mousedown.native="moveStart($event, 'Documents', i-1)" @mouseup.native="moveEnd($event, 'Documents', i-1)" @mousemove.native="moveActive($event, 'Documents', i-1)"
-    class="movable" :ref="'Documents'+(i-1)" :id="'Doc'+i"
+    class="movable" :ref="'Documents'+(i-1)" :id="'Doc'+i" v-on:connect="connect"
      :style="{'left': positionsDocuments[i-1][0] + 'px', 'top': positionsDocuments[i-1][1] + 'px'}" v-for="i in positionsDocuments.length" :key="'Documents'+i"></Documents>
     <Saturation  @mousedown.native="moveStart($event, 'Saturation', i-1)" @mouseup.native="moveEnd($event,'Saturation', i-1)" @mousemove.native="moveActive($event, 'Saturation', i-1)"
       class="movable" :ref="'Saturation'+(i-1)"
@@ -18,7 +18,7 @@
      <q-btn @click="addItem('SaveDoc')">Add SaveDoc block</q-btn>
      <hr/>
      <q-btn color="red" @click="clearAll()">Clear All</q-btn>
-     <q-btn color="orange" @click="connectTest()">Test Connection</q-btn>
+     <q-btn color="orange" @click="connect('Doc1', 'Doc2')">Test Connection</q-btn>
      <hr/>
 
   </q-page>
@@ -62,10 +62,16 @@ export default {
     }
   },
   methods: {
-    jsPlumbInit: function () {
+    jsPlumbInit: function (i1, i2) {
       // ready is not a function?
       jsPlumb.ready(function () {
-        console.log('test')
+        var firstInstance = jsPlumb.getInstance()
+        firstInstance.importDefaults({
+          Connector: [ 'Bezier', { curviness: 150 } ],
+          Anchors: [ 'TopCenter', 'BottomCenter' ]
+        })
+        // firstInstance.addEndpoint(i1)
+        // firstInstance.addEndpoint(i2)
       })
     },
     toggleItem: function () {
@@ -78,9 +84,10 @@ export default {
       this.positionsOCR.splice(0, this.positionsOCR.length)
       this.positionsSaveDoc.splice(0, this.positionsSaveDoc.length)
     },
-    connectTest: function () {
-      this.jsPlumbInit()
-      jsPlumb.connect({ source: 'Doc1', target: 'Doc2' })
+    connect: function (id1, id2) {
+      this.jsPlumbInit(id1, id2)
+      console.log(id1 + ' , ' + id2)
+      jsPlumb.connect({ source: id1, target: id2 })
     },
     // Find out which element moved
     addItem: function (type) {
