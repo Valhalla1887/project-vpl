@@ -19,6 +19,7 @@
      <hr/>
      <q-btn color="red" @click="clearAll()">Clear All</q-btn>
      <q-btn color="orange" @click="connect('Doc1', 'Doc2')">Test Connection</q-btn>
+     <!--div v-for="i in 100" :key="'Doc'+i" :id="'Doc'+i"-->Doc {{ i }}<!--/div-->
      <hr/>
 
   </q-page>
@@ -70,6 +71,7 @@ export default {
           Connector: [ 'Bezier', { curviness: 150 } ],
           Anchors: [ 'TopCenter', 'BottomCenter' ]
         })
+        jsPlumb.connect({ source: 'Doc1', target: 'Doc2' })
         // firstInstance.addEndpoint(i1)
         // firstInstance.addEndpoint(i2)
       })
@@ -85,9 +87,15 @@ export default {
       this.positionsSaveDoc.splice(0, this.positionsSaveDoc.length)
     },
     connect: function (id1, id2) {
-      this.jsPlumbInit(id1, id2)
+      jsPlumb.ready(function () {
+        var firstInstance = jsPlumb.getInstance()
+        firstInstance.importDefaults({
+          Connector: [ 'Bezier', { curviness: 150 } ],
+          Anchors: [ 'TopCenter', 'BottomCenter' ]
+        })
+        jsPlumb.connect({ source: id1, target: id2 })
+      })
       console.log(id1 + ' , ' + id2)
-      jsPlumb.connect({ source: id1, target: id2 })
     },
     // Find out which element moved
     addItem: function (type) {
@@ -119,6 +127,7 @@ export default {
         var deltaY = event.offsetY - this['offsetInitY' + type + index]
         this.$set(this[posVar][index], 0, this[posVar][index][0] + deltaX)
         this.$set(this[posVar][index], 1, this[posVar][index][1] + deltaY)
+        jsPlumb.animate(this)
       }
     }
   }

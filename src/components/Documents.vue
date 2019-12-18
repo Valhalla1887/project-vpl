@@ -1,5 +1,5 @@
 <template>
-  <div v-if="visible" id="number">
+  <div v-if="visible" :id="number">
      <q-list bordered separator class="bg-white">
       <q-item clickable v-ripple class="bg-green">
         <q-item-section>Documents</q-item-section>
