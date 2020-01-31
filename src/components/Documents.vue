@@ -8,7 +8,7 @@
         <q-item-section>
           <div class="row q-col-gutter-lg">
          <q-space />
-         <q-btn label="Output" v-model="val" left-label="true" id="xD" @click="connect(id, 'Doc2')"/>
+         <q-btn class="outputButton" label="Output" v-model="val" left-label="true" @click="connect(id, 'Doc2')"/>
        </div>
         </q-item-section>
       </q-item>

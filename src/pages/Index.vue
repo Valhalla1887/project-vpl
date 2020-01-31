@@ -92,9 +92,9 @@ export default {
           Connector: [ 'Bezier', { curviness: 150 } ],
           Anchors: [ 'TopCenter', 'BottomCenter' ]
         })
+        jsPlumb.connect({ source: id1, target: id2 })
         jsPlumb.draggable(id1)
         jsPlumb.draggable(id2)
-        jsPlumb.connect({ source: id1, target: id2 })
       })
       console.log(id1 + ' , ' + id2)
     },
