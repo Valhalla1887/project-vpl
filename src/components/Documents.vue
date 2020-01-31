@@ -5,11 +5,9 @@
         <q-item-section>Documents</q-item-section>
       </q-item>
       <q-item clickable v-ripple>
-        <q-item-section>
-          <div class="row q-col-gutter-lg">
-         <q-space />
+        <q-item-section center>
+         <q-btn label="Test" />
          <q-btn class="outputButton" label="Output" v-model="val" left-label="true" @click="connect(id, 'Doc2')"/>
-       </div>
         </q-item-section>
       </q-item>
       <q-item clickable v-ripple>
@@ -49,6 +47,7 @@ export default {
   methods: {
     deleteBlock: function () {
       this.visible = false
+      this.$emit('disconnect', this.number)
     },
     connect: function (id1, id2) {
       console.log(this.number)

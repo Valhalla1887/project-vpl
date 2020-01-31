@@ -98,6 +98,16 @@ export default {
       })
       console.log(id1 + ' , ' + id2)
     },
+    disconnect: function (id) {
+      console.log('DELETE')
+      var conn = jsPlumb.getConnections({
+        source: id
+      })
+      if (conn[0]) {
+        jsPlumb.deleteConnection(conn)
+        jsPlumb.reset()
+      }
+    },
     // Find out which element moved
     addItem: function (type) {
       if (type === 'Documents') {
