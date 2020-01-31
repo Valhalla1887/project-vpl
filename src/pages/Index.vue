@@ -19,7 +19,6 @@
      <hr/>
      <q-btn color="red" @click="clearAll()">Clear All</q-btn>
      <q-btn color="orange" @click="connect('Doc1', 'Doc2')">Test Connection</q-btn>
-     <!--div v-for="i in 100" :key="'Doc'+i" :id="'Doc'+i"-->Doc {{ i }}<!--/div-->
      <hr/>
 
   </q-page>
@@ -65,13 +64,13 @@ export default {
   methods: {
     jsPlumbInit: function (i1, i2) {
       // ready is not a function?
-      jsPlumb.ready(function () {
+      jsPlumb.ready(function (i1, i2) {
         var firstInstance = jsPlumb.getInstance()
         firstInstance.importDefaults({
           Connector: [ 'Bezier', { curviness: 150 } ],
           Anchors: [ 'TopCenter', 'BottomCenter' ]
         })
-        jsPlumb.connect({ source: 'Doc1', target: 'Doc2' })
+        jsPlumb.connect({ source: 'i1', target: 'i2' })
         // firstInstance.addEndpoint(i1)
         // firstInstance.addEndpoint(i2)
       })
@@ -93,6 +92,8 @@ export default {
           Connector: [ 'Bezier', { curviness: 150 } ],
           Anchors: [ 'TopCenter', 'BottomCenter' ]
         })
+        jsPlumb.draggable(id1)
+        jsPlumb.draggable(id2)
         jsPlumb.connect({ source: id1, target: id2 })
       })
       console.log(id1 + ' , ' + id2)
